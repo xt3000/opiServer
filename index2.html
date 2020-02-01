@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="" onclick="onHtmlClick()">
+   <head>
+ 	    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>iHome_v1.0</title>
+
+      <link rel="stylesheet" href="res/css/all.css">
+      <link rel="stylesheet" href="res/css/css.css">
+      <link rel="stylesheet" href="res/css/onClick.css">
+      <link rel="stylesheet" href="res/css/menu.css">
+      <link rel="stylesheet" href="res/css/header.css">
+      <link rel="stylesheet" href="res/css/room_content.css">
+      <link href="https://fonts.googleapis.com/css?family=Exo+2:200,400" rel="stylesheet">
+
+   </head>
+   <body class="bg" onload="gTime()">
+			<div id="particles-js"></div>
+     <!-- Menu -->
+
+      <!-- Content -->
+      <!--Header-->
+      <div class="header">
+        <div class="clock" id="clock"></div>
+        <div class="spec2"></div>
+        <div class="date" id="date"></div>
+      </div>
+      <div class="ws">
+        <div class="wbox">
+          <div class="box" id="outside_temp"></div>
+          <div class="box" id="outside_pres"></div>
+          <div class="box" id="outside_hum"></div>
+          <div class="box" id="outside_light"></div>
+          <div id="termDate"></div>
+        </div>
+      </div>
+
+      <!--Комната К0-коридор-->
+      <div class="wrapper bg" id="wrapper">
+      		<div class="k0 sh trans" id="k0" onclick="onK0Click()">
+      			<div class="hbox">
+              <div class="sens-box to-right">
+                <div class="sens" id="k0_sw1"><i class="far fa-lightbulb lg sw_off"></i></div>
+              </div>
+              <div class="sens-box to-left">
+                <div class="sens" id="k0_people"><i class="fas fa-male lg people"></i></div>
+              </div>
+              <div class="room-name trans">Коридор</div>
+
+      			</div>
+
+            <div class="room-box">
+              <div class="room">
+                <!-- ROOM CONTENT -->
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+              </div>
+            </div>
+      		</div>
+
+          <!--Комната К1-спальня-->
+      		<div class="k1 sh trans" id="k1" onclick="onK1Click()">
+      			<div class="hbox">
+              <div class="sens-box to-right">
+                <div class="sens" id="k1_sw1"><i class="far fa-lightbulb lg sw_off"></i></div>
+              </div>
+              <div class="sens-box to-left">
+                <div class="sens" id="k1_people"><i class="fas fa-male lg people"></i></div>
+              </div>
+      				<div class="room-name trans">Спальня</div>
+      			</div>
+
+            <div class="room-box">
+              <div class="room">
+                <!-- ROOM CONTENT -->
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+              </div>
+            </div>
+      		</div>
+
+          <!--Комната К2-детская-->
+      		<div class="k2 sh trans" id="k2" onclick="onK2Click()">
+      			<div class="hbox">
+              <div class="sens-box to-right">
+                <div class="sens" id="k2_sw1"><i class="far fa-lightbulb lg sw_off"></i></div>
+                <div class="sens" id="k2_sw2"><i class="far fa-lightbulb lg sw_off"></i></div>
+              </div>
+              <div class="sens-box to-left">
+                <div class="sens" id="k2_people"><i class="fas fa-male lg people"></i></div>
+              </div>
+              <div class="room-name trans">Детская</div>
+
+      			</div>
+
+            <div class="room-box">
+              <div class="room">
+                <!-- ROOM CONTENT -->
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+              </div>
+            </div>
+      		</div>
+
+          <!--Комната К3-гостинная-->
+      		<div class="k3 sh trans" id="k3" onclick="onK3Click()">
+      			<div class="hbox">
+              <div class="sens-box to-right">
+                <div class="sens" id="k3_sw1"><i class="far fa-lightbulb lg sw_off"></i></div>
+                <div class="sens" id="k3_sw2"><i class="far fa-lightbulb lg sw_off"></i></div>
+              </div>
+              <div class="sens-box to-left">
+                <div class="sens" id="k3_people"><i class="fas fa-male lg people"></i></div>
+              </div>
+              <div class="room-name trans">Гостинная</div>
+
+      			</div>
+
+            <div class="room-box">
+              <div class="room">
+                <!-- ROOM CONTENT -->
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+              </div>
+            </div>
+      		</div>
+
+          <!-- Комната К4-туалет -->
+      		<div class="k4 sh trans" id="k4" onclick="onK4Click()">
+      			<div class="hbox">
+              <div class="sens-box to-right">
+                <div class="sens" id="k4_sw1"><i class="far fa-lightbulb lg sw_off"></i></div>
+              </div>
+              <div class="sens-box to-left">
+                <div class="sens" id="k4_people"><i class="fas fa-male lg people"></i></div>
+              </div>
+              <div class="room-name trans">Туалет</div>
+      			</div>
+
+            <div class="room-box">
+              <div class="room">
+                <!-- ROOM CONTENT -->
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+                <div class="content-box"></div>
+              </div>
+            </div>
+      		</div>
+      </div>
+
+
+      <script src="res/js/time.js"></script>
+      <script src="res/js/onClick.js" defer></script>
+      <script src="res/js/wrapperSize.js" defer></script>
+      <script src="res/js/menu.js" defer></script>
+      <script src="res/js/ws.js" defer></script>
+      
+      <script src="res/js/particles.js"></script>
+      <script src="res/js/p_set.js"></script>
+   </body>
+</html>

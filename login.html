@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600&display=swap&subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="res/css/css.css">
+  <link rel="stylesheet" href="res/css/login.css">
+  <script src="/res/js/login.js" defer></script>
+  <script src="res/js/particles.js" defer></script>
+  <script src="res/js/p_set.js" defer></script>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="card">
+    <div class="avotar"></div>
+    <div class="form">
+      <h1>iCloudHome</h1>
+      <!-- <h3>Авторизуйтесь</h3> -->
+      <form method="post" onsubmit="onSubmit();">
+        <!-- <p id="login">Логин</p> -->
+        <input class="input-form" name="login" autocomplete="off" type="name" onfocus="onLogin()" placeholder="Логин">
+        <!-- <p id="pass">Пароль</p> -->
+        <input class="input-form" name="password" type="password" onfocus="onLogin()" placeholder="Пароль">
+        <input class="btn" type="submit" value="Вход">
+      </form>
+    </div>
+  </div>
+</body>
+</html>
