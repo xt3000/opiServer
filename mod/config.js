@@ -1,9 +1,10 @@
-// const fileStore = require('session-file-store')(session);
+const session = require('express-session');
+const fileStore = require('session-file-store')(session);
 
 
 
 // настройка fileStore (fsOptions)
-module.exports.fsOptions = {
+fsOptions = {
   minTimeout: 0,
   maxTimeout: 1,
   ttl: 864000,
@@ -13,18 +14,18 @@ module.exports.fsOptions = {
 }
 
 // настройка сессий
-// module.exports.sessOptions = {
-//   store: new fileStore(fsOptions),
-//   name: "__fid",
-//   secret: "iHome from Finch",
-//   resave: true,
-//   saveUninitialized: true,
-//   cookie: {
-//     httpOnly: true,
-//     path: "/",
-//     maxAge: 864000000
-//   }
-// }
+module.exports.sessOptions = {
+  store: new fileStore(fsOptions),
+  name: "__fid",
+  secret: "iHome from Finch",
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    path: "/",
+    maxAge: 864000000
+  }
+}
 
 //настройка Базы Данных
 module.exports.mongo = {
