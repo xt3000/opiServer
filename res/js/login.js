@@ -1,0 +1,7 @@
+function onPass() {
+  
+}
+
+function onLogin() {
+
+}

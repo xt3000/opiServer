@@ -1,0 +1,110 @@
+// JavaScript
+// roomTransformer
+
+function onHtmlClick() {
+	goDefault();
+}
+
+function onK3Click() {
+	event.stopPropagation();
+	goOn("k3");
+
+	goOut("k1");
+	goOut("k2");
+	goOut("k0");
+	goOut("k4");
+}
+
+function onK2Click() {
+	event.stopPropagation();
+	goOn("k2");
+
+	goOut("k1");
+	goOut("k3");
+	goOut("k0");
+	goOut("k4");
+}
+
+function onK1Click() {
+	event.stopPropagation();
+	goOn("k1");
+
+	goOut("k3");
+	goOut("k2");
+	goOut("k0");
+	goOut("k4");
+}
+
+function onK0Click() {
+	event.stopPropagation();
+	goOn("k0");
+
+	goOut("k1");
+	goOut("k2");
+	goOut("k3");
+	goOut("k4");
+}
+
+function onK4Click() {
+	event.stopPropagation();
+	goOn("k4");
+
+	goOut("k1");
+	goOut("k2");
+	goOut("k0");
+	goOut("k3");
+}
+
+//======================
+
+function goOut(elemId) {
+	var elem = document.getElementById(elemId);
+	//elem.style.position = "fixed";
+	elem.style.fontSize = "0px";
+	elem .style.opacity = "0";
+	elem.style.top = "0px";
+	elem.style.right = "0px";
+	elem.style.height = "0px";
+	elem.style.width = "0px";
+}
+
+function goOn(elemId) {
+	var elem = document.getElementById(elemId);
+	var box = elem.querySelectorAll('.hbox');
+	for (var i=0; i<box.length; i++) {
+		box[i].style.color = "#fff";
+	}
+
+	elem.style.opacity = "1";
+	elem.style.background = "#fff";
+	elem.style.top = "0%";
+	elem.style.right = "0%";
+	elem.style.height = "100%";
+	elem.style.width = "100%";
+}
+
+function goDefault() {
+//	var elem = document.getElementById(id);
+	var box = document.querySelectorAll('.hbox');
+	for (var i=0; box.length>i; i++) {
+		box[i].style.color = "";
+	}
+		goDef("k0");
+		goDef("k1");
+		goDef("k2");
+		goDef("k3");
+		goDef("k4");
+}
+function goDef(id) {
+	var elem = document.getElementById(id);
+	elem.style.fontSize = "";
+	elem.style.opacity = "";
+	elem.style.position = "";
+	elem.style.background = "";
+	elem.style.top = "";
+	elem.style.right = "";
+//	elem.style.left = "";
+	elem.style.height = "";
+	elem.style.width = "";
+
+}

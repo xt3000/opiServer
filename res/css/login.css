@@ -1,0 +1,140 @@
+* {
+	font-family: 'Exo 2', sans-serif;
+  line-height: 1.5;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	transition: opacity .5s ease, position .5s ease, top .5s ease, right .5s ease, height .5s ease, width .5s ease;
+	/* background: #314d5b; */
+	background: transparent;
+}
+
+html {
+  display: block;
+}
+
+body {
+	margin: 10px;
+}
+
+h1 {
+  cursor: default;
+  text-align: center;
+  padding: 0 0 1rem 0;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+	font-size: 1rem;
+	/* transform: translate(1rem, 2rem);
+	transition: transform .5 ease; */
+}
+
+form {
+  max-width: 650px;
+  margin: auto;
+  background: transparent;
+}
+
+.input-form{
+	width: 80%;
+  display: block;
+  margin: 0rem auto 2rem auto;
+  padding: .375rem .75rem;
+  /* border: 1px solid #ced4da; */
+	border: none;
+	border-bottom: 1px solid #6c757d;
+  /* border-radius: 5px; */
+  font-size: 1.3rem;
+  color: inherit;
+  background: inherit;
+  transition: border-bottom .4 ease-in-out;
+}
+
+input[type="submit"] {
+	font-size: 1.4rem;
+	width: 90%;
+	display: block;
+	margin: 1.3rem auto;
+  padding: .375rem .75rem;
+}
+
+::placeholder {
+  color: #fff;
+  opacity: .2;
+}
+
+/* .input-form:hover, .input-form:hover {
+  border-color: #fff;
+	width: 80%;
+} */
+
+.input-form:focus, .input-form:focus, .input-form:hover, .input-form:hover {
+	width: 90%;
+  outline: 0;
+  border-color: #fff;
+  /* box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); */
+}
+
+
+/* input:focus::placeholder {
+	transform: translate(-1rem, -2rem);
+} */
+
+.card {
+	position: absolute;
+	display: block;
+	background: inherit;
+	/* height: 40%; */
+	/* width: 50%; */
+	min-width: 15rem;
+	padding: 3rem 2rem;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, -50%);
+}
+
+.avotar {
+	background: red;
+	background-image: url(img/avo.png);
+	background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+	position: absolute;
+	height: 7rem;
+	width: 7rem;
+	top: -5rem;
+	left: calc(50% - 3.5rem);
+	border-radius: 50%;
+}
+
+.form {
+	display: block;
+	background: inherit;
+
+}
+
+.btn {
+	border: none;
+	border-radius: 50px;
+  opacity: 0.9;
+  background: red;
+  width: 8rem;
+  color: #fff;
+  border-color: #fff;
+  transition: opacity .15s ease-in-out,color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #fff;
+  border-color: #fff;
+  color: #1e333d;
+  opacity: 1;
+}
+
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(108,117,125,.5);
+}

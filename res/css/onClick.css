@@ -1,0 +1,32 @@
+.goOn {
+  opacity: 1;
+  /* background: #f0f0f0; */
+  top: 0%;
+  right: 0%;
+  height: 100%;
+  width: 100%;
+}
+
+.goOn:hover {
+  box-shadow: none;
+}
+
+.goOut {
+  transition: opacity .2s ease 0s,
+	 						position 0s ease .2s,
+	 						top 0s ease .2s,
+              left 0s ease .2s,
+							right 0s ease .2s,
+							height 0s ease .2s,
+              font-size 0s ease .2s,
+              letter-spacing 0.2s ease 0s,
+							width 0s ease .3s;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  font-size: 0px;
+  height: 0%;
+  width: 0%;
+  /* letter-spacing: 1000px; */
+
+}

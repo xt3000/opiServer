@@ -1,0 +1,43 @@
+.room-box {
+  background: inherit;
+  overflow: hidden;
+  position: absolute;
+  top: 30px;
+  left: 1.5em;
+  /* border-radius: 4px; */
+  height: 0;
+  /* height: calc(100% - 40px); */
+  width: calc(100% - 3em);
+}
+
+.room {
+  transition: top 1.7s cubic-bezier(0.2, 2.3, 0.5, 1) 0.7s;
+  position:absolute;
+  top: -110%;
+  left: 0;
+  /* border-radius: 4px; */
+  background: inherit;
+  height: 100%;
+  width: 100%;
+}
+
+.content-box {
+  background: #fff;
+  transition: margin-top 1.6s cubic-bezier(0.5, -0.5, 0.4, 6) 0.7s;
+  display: block;
+  min-height:25%;
+  margin: 2px;
+  margin-top: 0px;
+  border-radius: 0.3em;
+  /* opacity: .5; */
+  box-shadow: 0.2em 0.2em 0.4em -0.2em #8a8a8a;
+}
+
+.room-name {
+  display: inline-block;
+  white-space: nowrap;
+  color: inherit;
+/*     letter-spacing: 10000px; */
+  overflow: hidden;
+  text-align: center;
+}

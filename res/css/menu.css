@@ -1,0 +1,32 @@
+.mWrapper {
+	z-index: 100;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 100%;
+	width: 70px;
+	background: #253a47;
+}
+
+.mHeader {
+	display: block;
+	height: 120px;
+	background: #1e333d;
+}
+
+.mBrand {
+	display: block;
+	margin: auto;
+	background: inherit;
+	text-align: center;
+}
+
+.brandIco {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: inherit;
+	display: block;
+	margin: auto;
+	color: #fff;
+	text-align: center;
+}

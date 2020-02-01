@@ -1,0 +1,6 @@
+{
+  "1": {"id": "out1", "type": "sensor", "place": "outside", "people": 2, "sw1": true, "sw2": false},
+  "2": {"id": "out1", "type": "sensor", "place": "outside", "people": 1, "sw1": true, "sw2": false},
+  "3": {"id": "out1", "type": "sensor", "place": "outside", "people": 0, "sw1": false, "sw2": false},
+  "4": {"id": "out1", "type": "sensor", "place": "outside", "people": 1, "sw1": true, "sw2": false},
+}

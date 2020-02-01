@@ -1,0 +1,272 @@
+* {
+	font-family: 'Exo 2', sans-serif;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	transition: opacity .5s ease;
+	/*background: #253a47;*/
+}
+
+html {
+	background-image: url(img/bg8.webp);
+	background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+	font-size: 1rem;
+	height: -webkit-fill-available;
+	/*display: block;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#particles-js{
+	position: absolute;
+	display: block;
+	z-index: 0;
+	top:0;
+	left:0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  /*background-image: url(img/bg8.webp);*/
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+body {
+	background: #253a47;
+	margin: 10px;
+}
+
+.to-left {
+	float: left;
+}
+
+.to-right {
+	float: right;
+}
+
+i {
+	color: inherit;
+	background: transparent;
+	text-align: center;
+}
+
+i.fa-lg {
+	min-width: 29px;
+}
+
+i.lg {
+	font-size: 1em;
+  line-height: 0.75em;
+  vertical-align: -.0667em;
+}
+
+.trans {
+	transition: opacity .5s ease .4s,
+							background-color .6s ease .2s,
+	 						top .2s ease .2s,
+							left .2s ease .2s,
+							right .2s ease .2s,
+							height .2s ease .2s,
+							width .2s ease .2s,
+							font-size 0s ease 0.2s,
+							box-shadow .2s ease,
+							letter-spacing .8s ease .8s;
+}
+
+.sh {
+	overflow: hidden;
+	opacity: .93;
+	border-radius: 5px;
+	/* box-shadow: inset 0 0 0 1px #ECEFF1; */
+}
+
+.sh:hover {
+	z-index: 100;
+	/* box-shadow: 0 0 20px #fff; */
+	box-shadow: 0px 0px 5px 5px #08283cbd;
+}
+
+.bg {
+	background: transparent;
+}
+
+.k0, .k1, .k2, .k3, .k4 {
+	background: #253a47;
+}
+
+.wrapper {
+	margin: auto;
+	position: relative;
+	width: 35vw;
+	height: 20vh;
+	z-index: 1;
+}
+
+/* Коридор */
+.k0 {
+	overflow: hidden;
+	position: absolute;
+	height: calc(20% - 1px);
+	width: 65%;
+	top: 20%;
+	right: 0;
+	text-align: center;
+	z-index: 14;
+}
+
+/* Спальня */
+.k1 {
+	overflow: hidden;
+	position: absolute;
+	height: 60%;
+	width: calc(32% - 1px);
+	top: 40%;
+	right: 0;
+	text-align: center;
+	z-index: 13;
+}
+
+/* Детская */
+.k2 {
+	overflow: hidden;
+	position: absolute;
+	height: 60%;
+	width: 33%;
+	top: 40%;
+	right: 32%;
+	text-align: center;
+	z-index: 12;
+}
+
+/* Гостинная */
+.k3 {
+	overflow: hidden;
+	position: absolute;
+	height: 80%;
+	width: 35%;
+	top: 20%;
+	right: calc(65% + 1px);
+	text-align: center;
+	z-index: 11;
+}
+
+/* Туалет */
+.k4 {
+	overflow: hidden;
+	position: absolute;
+	height: calc(20% - 1px);
+	width: 25%;
+	top: 0;
+	right: 20%;
+	text-align: center;
+	z-index: 10;
+}
+
+.hbox {
+	overflow:hidden;
+	max-height: 19px;
+	line-height: 19px;
+	color: #adb8bd;
+	border-radius: 0.3em;
+	margin: 0.2em;
+}
+.wbox {
+	background: transparent;
+	margin: 0;
+
+}
+
+.sens {
+	color: #adb8bd;
+	display: inline-block;
+	background: inherit;
+	margin: 0 0.1em;
+}
+
+.box {
+	/* display: inline-block; */
+	color: #fff;
+	opacity: 1;
+	background: transparent;
+	border-radius: 4px;
+	margin: 5px 2px;
+	padding: 3px;
+}
+
+.sens-box {
+	display: inline-block;
+	background: inherit;
+	border-radius: 7px;
+	margin: 0 1%;
+}
+
+.spec {
+	opacity: inherit;
+	background: #fff;
+	border-radius: 3px;
+	margin: 0px 20px 20px 5px;
+	padding: 0.4px;
+}
+
+.spec2 {
+	opacity: inherit;
+	background: #253a47;
+	border-radius: 3px;
+	margin: 0 5px 0 5px;
+	padding: 0.4px;
+}
+
+.sw_on {
+	color: #f9ff9d;
+	text-shadow: 0 0 6px #ffbb00;
+	margin: 0;
+	padding: 0;
+}
+
+.sw_off {
+	color: #adb8bd;
+	margin: 0;
+	padding: 0;
+}
+
+.people {
+	color: #adb8bd;
+	text-shadow: 0 0 5px #333;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+/* Смартфон */
+@media only screen and (max-width: 425px) {
+	html {
+		font-size: 0.6rem;
+		-webkit-font-size-delta: 0.6rem;
+	}
+}
+
+/* Планшет */
+@media only screen and (min-width: 426px) {
+	html {
+		font-size: 0.7rem;
+		-webkit-font-size-delta: 0.7rem;
+	}
+	.box {
+		font-size: 1.4rem;
+		-webkit-font-size-delta: 1.4rem;
+	}
+}
+
+/* Монитор */
+@media only screen and (min-width: 1024px) {
+	html {
+		font-size: 1rem;
+		-webkit-font-size-delta: 1rem;
+	}
+}

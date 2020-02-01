@@ -1,0 +1,35 @@
+.header {
+  background: transparent;
+  position: fixed;
+  top: 5px;
+  left: 8px;
+  display: block;
+  text-align: center;
+}
+
+
+.clock {
+  text-shadow: #253a474d 1px 1px 0px, #253a474d -1px -1px 0px,
+               #253a474d -1px 1px 0px, #253a474d 1px -1px 0px;
+  color: #fff;
+  background: transparent;
+  font-size: 350%;
+  font-weight: bold;
+}
+
+.date {
+color: #fff;
+font-size: 160%;
+background: transparent;
+font-weight: 200;
+}
+
+.ws {
+background: transparent;
+position: fixed;
+top: 5px;
+right: 8px;
+font-size: 150%;
+text-shadow: #253a474d 1px 1px 0px, #253a474d -1px -1px 0px,
+             #253a474d -1px 1px 0px, #253a474d 1px -1px 0px;
+}
