@@ -13,18 +13,7 @@ const mongoose = require('mongoose');
 
 
 
-const sessOptions = {
-  store: new fileStore(config.fsOptions),
-  name: "__fid",
-  secret: "iHome from Finch",
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: true,
-    path: "/",
-    maxAge: 864000000
-  }
-}
+// ...VARIBLES...
 const interfaces = [];
 const sensors = [];
 const user = {
@@ -33,7 +22,8 @@ const user = {
   pass: "3284"
 };
 
-//...middleware
+//
+...MIDDLEWARE...
 
 //...passport strtegy
 passport.use(new LocalStrategy({usernameField: 'login'},
@@ -66,7 +56,7 @@ passport.deserializeUser(function(id, done){
 app.use('/res', express.static('res'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(session(sessOptions));
+app.use(session(config.sessOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 //.......................
