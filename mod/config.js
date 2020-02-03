@@ -29,6 +29,6 @@ module.exports.sessOptions = {
 
 //настройка Базы Данных
 module.exports.mongo = {
-  db: 'mongodb://mongo-root:32842004@192.168.0.3:27017/ihome',
+  db: 'mongodb://localhost:27017/ihome',
   secret: 'iFinch_dev'
 }
