@@ -154,6 +154,20 @@ app.ws('/ws', function(ws, req) {
       }
     });
 
+    // test read DB...
+    mongoose.connection.db.listCollections().toArray(function (err, names) {
+      console.log("DB names:");
+      for (var i=0; i<names.length; i++) {
+        console.log(names[i].name);
+        var mModel = mongoose.model(names[i].name, mongoSet.mSchema);
+        var obj = mModel.find().sort({'_id':-1}).limit(1);        //find().sort({'_id':-1}).limit(1); findOne().sort({'_id':-1})
+        console.log(obj);
+      };
+
+    });
+    // var mModel = mongoose.model()
+    // ...test
+
   } else if (params.query.type === 'sensor') {
 
   	//...подключен 'сенсор'
@@ -182,12 +196,12 @@ app.ws('/ws', function(ws, req) {
       else{                                                 //Сенсор передаёт данные
           str.inDate = new Date();                          //Добавляем в данные время получения
           console.log(str.inDate);
-          // fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
-          //   if(err) throw err;
-          // });
+          fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
+            if(err) throw err;
+          });
 
           //test mongodb...
-          str.name = str.id;
+          str.name = str.id;                                          //Сохраняем d БД
           delete str.id;
           var mModel = mongoose.model(str.name, mongoSet.mSchema);
           var sens = new mModel(str);
