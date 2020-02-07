@@ -1,3 +1,4 @@
+
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);
 
@@ -11,7 +12,7 @@ fsOptions = {
   retries: 2,
   reapAsync: false,
   reapSyncFallback: false
-}
+};
 
 // настройка сессий
 module.exports.sessOptions = {
@@ -25,10 +26,6 @@ module.exports.sessOptions = {
     path: "/",
     maxAge: 864000000
   }
-}
+};
 
-//настройка Базы Данных
-module.exports.mongo = {
-  db: 'mongodb://localhost:27017/ihome',
-  secret: 'iFinch_dev'
-}
+module.exports.secret = 'iFinch_dev';

@@ -9,6 +9,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const fileStore = require('session-file-store')(session);
 const config = require('./mod/config');
+const mongoSet = require('./mod/mongoSet');
 const mongoose = require('mongoose');
 
 
@@ -22,8 +23,7 @@ const user = {
   pass: "3284"
 };
 
-//
-...MIDDLEWARE...
+//...MIDDLEWARE...
 
 //...passport strtegy
 passport.use(new LocalStrategy({usernameField: 'login'},
@@ -62,15 +62,24 @@ app.use(passport.session());
 //.......................
 
 // Подключение к MongoDB
-mongoose.connect(config.mongo.db, { useNewUrlParser: true });
-
+mongoose.connect(mongoSet.db, mongoSet.options);
 mongoose.connection.on('connected', () => {
   console.log("DB Connected!")
-})
-
+});
 mongoose.connection.on('error', (err) => {
   console.log("DB Connection ERROR: " + err)
-})
+});
+
+// var idoor = {
+// 	place: 'k3',
+// 	type: 'sensor',
+// 	sw1: true,
+// 	sw2: false,
+// 	piople: 3
+// };
+// var mModel = mongoose.model('door', mongoSet.mSchema);
+// var sens = new mModel(idoor);
+// sens.save();
 //.......................
 
 
@@ -171,14 +180,19 @@ app.ws('/ws', function(ws, req) {
         ws.send(data);
       }
       else{                                                 //Сенсор передаёт данные
-          var d = new Date();                               //Добавляем в данные время получения
-          console.log('Date: ' + d);
-          console.log(str.id);
-          str.inDate = d;
+          str.inDate = new Date();                          //Добавляем в данные время получения
           console.log(str.inDate);
-          fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
-            if(err) throw err;
-          });
+          // fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
+          //   if(err) throw err;
+          // });
+
+          //test mongodb...
+          str.name = str.id;
+          delete str.id;
+          var mModel = mongoose.model(str.name, mongoSet.mSchema);
+          var sens = new mModel(str);
+          sens.save();
+          //...test
 
           console.log('Send: ok');
           ws.send('ok');                                   //Ответ сенсору 'ok'
