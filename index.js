@@ -71,13 +71,14 @@ mongoose.connection.on('error', (err) => {
 });
 
 // var idoor = {
+//   name: 'doorsens',
 // 	place: 'k3',
 // 	type: 'sensor',
 // 	sw1: true,
 // 	sw2: false,
 // 	piople: 3
 // };
-// var mModel = mongoose.model('door', mongoSet.mSchema);
+// var mModel = mongoose.model(idoor.name, mongoSet.mSchema);
 // var sens = new mModel(idoor);
 // sens.save();
 //.......................
@@ -146,13 +147,13 @@ app.ws('/ws', function(ws, req) {
     interfaces.push(ws);
     console.log('interfaces.length: ' + interfaces.length);
 
-    fs.readdir(__dirname+'/res/history/', function(err, items) {
-      if (err) throw err;
-      for (var i=0; i<items.length; i++) {
-        var data = fs.readFileSync(__dirname+'/res/history/'+items[i],'utf8')
-        ws.send(data);
-      }
-    });
+    // fs.readdir(__dirname+'/res/history/', function(err, items) {
+    //   if (err) throw err;
+    //   for (var i=0; i<items.length; i++) {
+    //     var data = fs.readFileSync(__dirname+'/res/history/'+items[i],'utf8')
+    //     ws.send(data);
+    //   }
+    // });
 
     // test read DB...
     mongoose.connection.db.listCollections().toArray(function (err, names) {
@@ -160,12 +161,16 @@ app.ws('/ws', function(ws, req) {
       for (var i=0; i<names.length; i++) {
         console.log(names[i].name);
         var mModel = mongoose.model(names[i].name, mongoSet.mSchema);
-        var obj = mModel.find().sort({'_id':-1}).limit(1);        //find().sort({'_id':-1}).limit(1); findOne().sort({'_id':-1})
-        console.log(obj);
+        mModel.findOne().sort('-_id').exec(function(err, resolt){
+        	if (err) throw err;
+          console.log('SEND for interface:');
+        	console.log(JSON.stringify(resolt));
+          console.log('');
+          if (resolt != null) ws.send(JSON.stringify(resolt));
+        });
       };
 
     });
-    // var mModel = mongoose.model()
     // ...test
 
   } else if (params.query.type === 'sensor') {
@@ -182,28 +187,40 @@ app.ws('/ws', function(ws, req) {
   //...onMassage()
   ws.on('message', function(msg) {
     var str = JSON.parse(msg);
+    str.name = str.id;
+    delete str.id;
 
     console.log('ws: massage');
     console.log('JSON > type: ' + str.type);
     console.log(' ');
     if (str.type === 'sensor') {
-      var fileName = __dirname+'/res/history/'+str.id+'.his';
+      // var fileName = __dirname+'/res/history/'+str.id+'.his';
       if(str.req === true){                                 //Сенсор запрашивает данные
-        var data = fs.readFileSync(fileName,'utf8')
-        console.log('Send: data');
-        ws.send(data);
+        // var data = fs.readFileSync(fileName,'utf8')
+        // console.log('Send: data');
+        // ws.send(data);
+
+        //test mongoDB...
+        var mModel = mongoose.model(str.name, mongoSet.mSchema);
+        mModel.findOne().sort('-_id').exec(function(err, resolt){
+        	if (err) throw err;
+          console.log('SEND for sensor:');
+        	console.log(JSON.stringify(resolt));
+          console.log('');
+        	if (resolt != null) ws.send(JSON.stringify(resolt));
+          else ws.send("{}");
+        });
+        //...test
       }
       else{                                                 //Сенсор передаёт данные
-          str.inDate = new Date();                          //Добавляем в данные время получения
-          console.log(str.inDate);
-          fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
-            if(err) throw err;
-          });
+          // str.inDate = new Date();                          //Добавляем в данные время получения
+          // console.log(str.inDate);
+          // fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
+          //   if(err) throw err;
+          // });
 
           //test mongodb...
-          str.name = str.id;                                          //Сохраняем d БД
-          delete str.id;
-          var mModel = mongoose.model(str.name, mongoSet.mSchema);
+          var mModel = mongoose.model(str.name, mongoSet.mSchema);      //Сохраняем d БД
           var sens = new mModel(str);
           sens.save();
           //...test
