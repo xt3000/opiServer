@@ -11,6 +11,7 @@ const fileStore = require('session-file-store')(session);
 const config = require('./mod/config');
 const mongoSet = require('./mod/mongoSet');
 const mongoose = require('mongoose');
+const main = require('./routes/main');
 
 
 
@@ -85,50 +86,7 @@ mongoose.connection.on('error', (err) => {
 
 
 //...routes
-  //.../home
-
-app.get('/', function(req, res){
-  console.log('get route: /');
-  console.log('session: ' + JSON.stringify(req.session));
-  if(req.isAuthenticated()){
-    console.log('.isAuthenticated DONE');
-    console.log('req.user: ' + JSON.stringify(req.user));
-    console.log('req.user: ' + JSON.stringify(req.session.passport.user));
-    res.sendFile(__dirname + '/index.html');
-  }else{
-    console.log('isAuthenticated FALSE');
-    console.log('req.user: ' + JSON.stringify(req.user));
-    console.log('req.passport: ' + JSON.stringify(req.session.passport));
-    res.redirect('/login');
-  }
-});
-
-  //.../login
-app.get('/login', function(req, res) {
-  console.log('GET route: /login');
-  console.log('sid: ' + req.sessionID);
-  res.sendFile(__dirname + '/login.html');
-});
-
-
-
-app.post('/login', function(req, res, next){
-  console.log('POST route: /login');
-  passport.authenticate('local', function(err, user, info){
-    if(info) {return res.send(info.message)}
-    if (err) { return next(err); }
-    if (!user) { return res.redirect('/login'); }
-    req.login(user, function(err){
-      console.log('.login:');
-      if (err) { return next(err); }
-      return res.redirect('/');
-    })
-  })(req, res, next);
-});
-
-
-
-
+app.use('/' , main);
 
 //******* WS *******
 
@@ -194,13 +152,7 @@ app.ws('/ws', function(ws, req) {
     console.log('JSON > type: ' + str.type);
     console.log(' ');
     if (str.type === 'sensor') {
-      // var fileName = __dirname+'/res/history/'+str.id+'.his';
-      if(str.req === true){                                 //Сенсор запрашивает данные
-        // var data = fs.readFileSync(fileName,'utf8')
-        // console.log('Send: data');
-        // ws.send(data);
-
-        //test mongoDB...
+      if(str.req === true){                                           //***Сенсор запрашивает данные
         var mModel = mongoose.model(str.name, mongoSet.mSchema);
         mModel.findOne().sort('-_id').exec(function(err, resolt){
         	if (err) throw err;
@@ -210,21 +162,11 @@ app.ws('/ws', function(ws, req) {
         	if (resolt != null) ws.send(JSON.stringify(resolt));
           else ws.send("{}");
         });
-        //...test
       }
-      else{                                                 //Сенсор передаёт данные
-          // str.inDate = new Date();                          //Добавляем в данные время получения
-          // console.log(str.inDate);
-          // fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
-          //   if(err) throw err;
-          // });
-
-          //test mongodb...
-          var mModel = mongoose.model(str.name, mongoSet.mSchema);      //Сохраняем d БД
+      else{                                                             //***Сенсор передаёт данные
+          var mModel = mongoose.model(str.name, mongoSet.mSchema);      //Сохраняем в БД
           var sens = new mModel(str);
           sens.save();
-          //...test
-
           console.log('Send: ok');
           ws.send('ok');                                   //Ответ сенсору 'ok'
 
@@ -234,8 +176,8 @@ app.ws('/ws', function(ws, req) {
               interfaces[i].close();
               interfaces.splice(i, 1);
             } else {
-              console.log('ws: send');
-              console.log(JSON.stringify(str));
+              console.log('ws: send new to all interfaces');
+              console.log(str);
               interfaces[i].send(JSON.stringify(str));
               }
           }
@@ -250,13 +192,9 @@ app.ws('/ws', function(ws, req) {
     console.log('ws: close');
   });
 
-});
+}); // ..app.ws('/ws', ...){...}
 
 app.listen(8080);
 console.warn('Server started');
 
 // доп функции...
-
-function wsSendAll(msg) {
-
-}
