@@ -8,15 +8,17 @@ ws.onerror = function(error) { onError(error) };
 
 //функции..
 function onOpen() {
-
+  console.log('WS: Open');
   //TODO
 
 }
 
 function onClose(evt) {
   if (evt.wasClean) {
+    console.log('WS: Close');
     //TODO 'ws: close'
   } else {
+    console.log('WS: Disconnect');
     //TODO 'ws: disconnect'
   }
 }
@@ -68,9 +70,11 @@ function onMessage(evt) {
     }
 
 
-    if (str.inDate != undefined) {   // время показаний датчиков
+    if (str.inDate != undefined) {     // время показаний датчиков
+    	if(str.temp != undefined){
       outTermTime.setTime(str.inDate);
       console.log('outTermTime: ' + outTermTime);
+     }
     }
   }
 }
@@ -80,6 +84,7 @@ function onError(error) {
 }
 
 function wsSend(msg) {
+  console.log('WS: Send');
   var str = {
     type: "interface",
     msg: msg

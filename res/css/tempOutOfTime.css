@@ -1,0 +1,14 @@
+.toot {
+  display: block;
+  background: transparent;
+  font-size: 60%;
+  text-align: center;
+}
+.tootDays {
+  color: #b80000;
+}
+
+
+.tootHours {
+  color: #b88400;
+}

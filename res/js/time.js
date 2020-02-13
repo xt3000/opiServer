@@ -1,9 +1,4 @@
 var outTermTime = new Date();
-// console.log(outTermTime);
-// outTermTime.setHours(outTermTime.getHours()-3);
-// console.log(outTermTime);
-// outTermTime.setMinutes(outTermTime.getMinutes()-21);
-// console.log(outTermTime);
 
 function gTime() {
   //получаем дату
@@ -22,22 +17,17 @@ function gTime() {
   mon = check(mon);
   document.getElementById('date').innerHTML = dat + "." + mon + "." + yer;
 
-  //console.log('time: ' + tm.getHours()+":"+tm.getMinutes());
-  tm.setHours(tm.getHours()-2);
-  //console.log('OTT: '+outTermTime.getHours()+":"+outTermTime.getMinutes());
-
-  if (tm.getTime() > outTermTime.getTime()) {
-    var t = new Date(tm - outTermTime);
-    // console.log(t);
-    //document.getElementById('outside_temp').style.color = "#b80000";
-    //document.getElementById('outside_light').style.color = "#b80000";
+  // tm.setHours(tm.getHours()-2);
+  if (tm.getDate() > outTermTime.getDate()){
     var termDate = document.getElementById('termDate');
-    termDate.style.color = "#b80000";
-    termDate.style.background = "transparent";
-    termDate.style.fontSize = "60%";
-    termDate.style.display = "block";
-    termDate.style.textAlign = "center";
-    termDate.innerHTML = "Обновлено больше" + '</br>' + (t.getUTCHours()+2) + "ч. назад";
+    termDate.classList.add('tootDays');
+    var t = tm.getDate() - outTermTime.getDate();
+    termDate.innerHTML = "Обновлено больше" + '</br>' + t + "дн. назад";
+  }else if (tm.getHours() > outTermTime.getHours()) {
+    var t = tm.getHours() - outTermTime.getHours();
+    var termDate = document.getElementById('termDate');
+    termDate.classList.add('tootHours');
+    termDate.innerHTML = "Обновлено больше" + '</br>' + t + "ч. назад";
   }else {
     //document.getElementById('outside_temp').style.color = "";
     //document.getElementById('outside_light').style.color = "";
@@ -51,5 +41,5 @@ function gTime() {
 
 function check(i) {
   if (i<10) { i="0" + i;}
-return i;
+  return i;
 }

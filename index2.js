@@ -8,35 +8,22 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const fileStore = require('session-file-store')(session);
-  var fsOptions = {
-    minTimeout: 0,
-    maxTimeout: 1,
-    ttl: 864000,
-    retries: 2,
-    reapAsync: false,
-    reapSyncFallback: false
-  }
-  var sessOptions = {
-    store: new fileStore(fsOptions),
-    name: "__fid",
-    secret: "iHome from Finch",
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      path: "/",
-      maxAge: 864000000
-    }
-  }
+const config = require('./mod/config');
+const mongoSet = require('./mod/mongoSet');
+const mongoose = require('mongoose');
 
-const HISTORY_LENGTH = 20;
-var interfaces = [];
-var sensors = [];
+
+
+// ...VARIBLES...
+const interfaces = [];
+const sensors = [];
 const user = {
   id: "f3i2n8c4h",
   login: "finch",
   pass: "3284"
 };
+
+//...MIDDLEWARE...
 
 //...passport strtegy
 passport.use(new LocalStrategy({usernameField: 'login'},
@@ -64,20 +51,40 @@ passport.deserializeUser(function(id, done){
     done(null, false);
   }
 });
-
 //.......................
 
-//...middleware
 app.use('/res', express.static('res'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(session(sessOptions));
+app.use(session(config.sessOptions));
 app.use(passport.initialize());
 app.use(passport.session());
+//.......................
+
+// Подключение к MongoDB
+mongoose.connect(mongoSet.db, mongoSet.options);
+mongoose.connection.on('connected', () => {
+  console.log("DB Connected!")
+});
+mongoose.connection.on('error', (err) => {
+  console.log("DB Connection ERROR: " + err)
+});
+
+// var idoor = {
+// 	place: 'k3',
+// 	type: 'sensor',
+// 	sw1: true,
+// 	sw2: false,
+// 	piople: 3
+// };
+// var mModel = mongoose.model('door', mongoSet.mSchema);
+// var sens = new mModel(idoor);
+// sens.save();
+//.......................
+
 
 //...routes
   //.../home
-
 
 app.get('/', function(req, res){
   console.log('get route: /');
@@ -118,6 +125,10 @@ app.post('/login', function(req, res, next){
   })(req, res, next);
 });
 
+
+
+
+
 //******* WS *******
 
   //...onConnect()
@@ -143,6 +154,23 @@ app.ws('/ws', function(ws, req) {
       }
     });
 
+    // test read DB...
+    mongoose.connection.db.listCollections().toArray(function (err, names) {
+      console.log("DB names:");
+      for (var i=0; i<names.length; i++) {
+        console.log(names[i].name);
+        var mModel = mongoose.model(names[i].name, mongoSet.mSchema);
+        mModel.findOne().sort('-_id').exec(function(err, resolt){
+        	if (err) throw err;
+        	console.log(resolt);
+        	//ws.send(resolt);
+        });        //find().sort({'_id':-1}).limit(1); findOne().sort({'_id':-1})
+      };							// .findOne().sort('-inDate').exec(function(err, post) { ... });
+
+    });
+    // var mModel = mongoose.model()
+    // ...test
+
   } else if (params.query.type === 'sensor') {
 
   	//...подключен 'сенсор'
@@ -151,7 +179,7 @@ app.ws('/ws', function(ws, req) {
     sensors.push(ws);
     console.log('sensors.length: ' + sensors.length);
   } else {
-    ws.close();                                            //..усройство не распознано
+    ws.close(); //..усройство не распознано
   }
 
   //...onMassage()
@@ -164,47 +192,24 @@ app.ws('/ws', function(ws, req) {
     if (str.type === 'sensor') {
       var fileName = __dirname+'/res/history/'+str.id+'.his';
       if(str.req === true){                                 //Сенсор запрашивает данные
-        var data = fs.readFileSync(fileName,'utf8');
+        var data = fs.readFileSync(fileName,'utf8')
         console.log('Send: data');
         ws.send(data);
       }
       else{                                                 //Сенсор передаёт данные
-      //+++ТЕСТ+++
-        str.sens.inDate = new Date();                  //Добавляем дату в объект данных сенсора
-        var params = [str.sens];                       //Создаём массив с объектом sens{}
-        str.params = params;                           //кидаем массив в JSON
-        delete str.sens;                               //Удаляем более не нужный щбъект sens
+          str.inDate = new Date();                          //Добавляем в данные время получения
+          console.log(str.inDate);
+          fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
+            if(err) throw err;
+          });
 
-        fs.stat(fileName, function(err, stat) {
-        	if(err == null) {	                                    	//ФАЙЛ СУЩЕСТВУЕТ
-        		console.log('File exists');
-        		var readJSON = JSON.parse(fs.readFileSync(fileName,'utf8')); //...переписать на readFile()    // Читаем и парсим данные с диска
-        		readJSON.params.push(str.params[0]);                  //Добавляем новые данные сенсора
-        		if(readJSON.params.length > HISTORY_LENGTH) readJSON.params.shift();
-        		fs.writeFile(fileName, JSON.stringify(readJSON), function(err) { //Сохраняем
-              if(err) throw err;
-            });
-
-        	} else if(err.code == 'ENOENT') {                       // ФАЙЛА НЕТ
-        			fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем новый файл
-              if(err) throw err;
-            });
-
-        		} else {
-        			 console.log('Some other error: ', err.code);
-        			}
-        });
-      //+++____+++
-
-          // var d = new Date();                               //Добавляем в данные время получения
-          // console.log('Date: ' + d);
-          // console.log(str.id);
-          // str.inDate = d;
-          // console.log(str.inDate);
-          //  fs.writeFile(fileName, JSON.stringify(str), function(err) { //Сохраняем
-          //   if(err) throw err;
-          // });
-
+          //test mongodb...
+          str.name = str.id;                                          //Сохраняем d БД
+          delete str.id;
+          var mModel = mongoose.model(str.name, mongoSet.mSchema);
+          var sens = new mModel(str);
+          sens.save();
+          //...test
 
           console.log('Send: ok');
           ws.send('ok');                                   //Ответ сенсору 'ok'
