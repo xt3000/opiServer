@@ -17,11 +17,11 @@ const sensSchema = mongoose.Schema({
 	sw2: {
 		type: Boolean
 	},
-	piople: {
+	people: {
 		type: Number
 	},
 	auto: {
-		type: String
+		type: Boolean			//Опция сенсора (resol добавляется перед отправкой из переменной)
 	},
 	temp: {
 		type: Number

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="" onclick="onHtmlClick()">
+<html lang="ru" class="" onclick="onHtmlClick()">
    <head>
  	    <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,12 +21,12 @@
 
       <!-- Content -->
       <!--Header-->
-      <div class="header">
+      <div class="header" onclick="onOutClick()">
         <div class="clock" id="clock"></div>
         <div class="spec2"></div>
         <div class="date" id="date"></div>
       </div>
-      <div class="ws">
+      <div class="ws" onclick="onOutClick()">
         <div class="wbox">
           <div class="box" id="outside_temp"></div>
           <div class="box" id="outside_pres"></div>
@@ -34,6 +34,11 @@
           <div class="box" id="outside_light"></div>
           <div class="toot" id="termDate"></div>
         </div>
+      </div>
+
+      <div class="outSensCont" id="osCont"  onclick="goDefault()">
+      		<div class="outSensBox trans" id="osBox"></div>
+
       </div>
 
       <!--Комната К0-коридор-->
@@ -159,6 +164,9 @@
       <script src="res/js/wrapperSize.js" defer></script>
       <script src="res/js/menu.js" defer></script>
       <script src="res/js/ws.js" defer></script>
+      <script src="res/js/ws_getSensor.js" defer></script>
+      <script src="res/js/ws_getOptions.js" defer></script>
+      <script src="res/js/ws_getRequest.js" defer></script>
 
       <script src="res/js/particles.js"></script>
       <script src="res/js/p_set.js"></script>

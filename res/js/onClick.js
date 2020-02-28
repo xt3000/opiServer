@@ -1,6 +1,12 @@
 // JavaScript
 // roomTransformer
 
+function onOutClick() {
+	event.stopPropagation();
+	var elem = document.getElementById('osCont');
+	elem.classList.add('osCont_on');
+}
+
 function onHtmlClick() {
 	goDefault();
 }
@@ -13,6 +19,8 @@ function onK3Click() {
 	goOut("k2");
 	goOut("k0");
 	goOut("k4");
+
+	wsSend('req', 'k3', 20);
 }
 
 function onK2Click() {
@@ -23,6 +31,8 @@ function onK2Click() {
 	goOut("k3");
 	goOut("k0");
 	goOut("k4");
+
+	wsSend('req', 'k2', 20);
 }
 
 function onK1Click() {
@@ -33,6 +43,8 @@ function onK1Click() {
 	goOut("k2");
 	goOut("k0");
 	goOut("k4");
+
+	wsSend('req', 'k1', 20);
 }
 
 function onK0Click() {
@@ -43,6 +55,8 @@ function onK0Click() {
 	goOut("k2");
 	goOut("k3");
 	goOut("k4");
+
+	wsSend('req', 'k0', 20);
 }
 
 function onK4Click() {
@@ -53,6 +67,8 @@ function onK4Click() {
 	goOut("k2");
 	goOut("k0");
 	goOut("k3");
+
+	wsSend('req', 'k4', 20);
 }
 
 //======================
@@ -97,10 +113,13 @@ function goDefault() {
 		goDef("k2");
 		goDef("k3");
 		goDef("k4");
+		goDef("osCont")
 }
 
 function goDef(id) {
 	var elem = document.getElementById(id);
+
+	elem.classList.remove('osCont_on');
 
 	var roomBox = elem.querySelector('.room-box');
 	roomBox.style.height = "";

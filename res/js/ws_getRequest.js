@@ -1,0 +1,3 @@
+function getRequest(str) {
+
+}

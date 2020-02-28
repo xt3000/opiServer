@@ -1,4 +1,7 @@
-.header {
+.header {				/*0099ff11;		455a6711*/
+  /*background: #3684B622;
+  box-shadow: 0 0 0 1px #3684B6;
+  border-radius: 3px;		*/
   background: transparent;
   position: fixed;
   top: 5px;
@@ -6,7 +9,6 @@
   display: block;
   text-align: center;
 }
-
 
 .clock {
   text-shadow: #253a474d 1px 1px 0px, #253a474d -1px -1px 0px,
@@ -24,7 +26,10 @@ background: transparent;
 font-weight: 200;
 }
 
-.ws {
+.ws {			/*0099ff11;		455a6711*/
+/*background: #3684B622;
+box-shadow: 0 0 0 1px #3684B6;
+border-radius: 3px;		*/
 background: transparent;
 position: fixed;
 top: 5px;
@@ -32,4 +37,33 @@ right: 8px;
 font-size: 150%;
 text-shadow: #253a474d 1px 1px 0px, #253a474d -1px -1px 0px,
              #253a474d -1px 1px 0px, #253a474d 1px -1px 0px;
+}
+
+
+.outSensCont {
+	transition: top .2s ease .2s;
+	z-index: 101;
+	position: fixed;
+	background: #00000099;
+	/*box-shadow: 0 0 0 1px #3684B6ff;*/
+	top: -100%;
+	right: 0%;
+	width: 100%;
+	height: 100%;
+	/*border-radius: 0 0 3px 3px;*/
+}
+
+.outSensBox {
+	position: absolute;
+	width: calc(100% - 100px);
+	height: calc(100% - 50px);
+	top: 0px;
+	right: 50px;
+	background: #ffffffff;
+	/*box-shadow: 0 0 5px 0 #ffffff;
+	border-radius: 0 0 2px 2px;*/
+}
+
+.osCont_on {
+	top: 0;
 }

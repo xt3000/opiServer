@@ -19,6 +19,7 @@ const mongoSensList = require('./mod/mongoSensList')
 
 
 // ...VARIBLES...
+var resol_auto = true;    //// TODO: прописать функцию управления переменной (перманентно, по времени суток, ...)
 const interfaces = []
 const sensors = []
 const user = {
@@ -86,7 +87,7 @@ app.ws('/ws', function(ws, req) {
 
     mongoSens.readAllLastest(function(err, resolt){                      //  ..Read DB all
       if (err) throw err;
-      if (resolt.length > 0) ws.send(JSON.stringify(resolt[0]));
+      if (resolt != null) ws.send(JSON.stringify(resolt[0]));
     });
 
   } else if (params.query.type === 'sensor') {                                  //***подключен 'Сенсор'***
@@ -100,18 +101,30 @@ app.ws('/ws', function(ws, req) {
   //...onMassage()
   ws.on('message', function(msg) {
     var str = JSON.parse(msg);
-    str.name = str.id;
-    delete str.id;
+    if(str.id != undefined){
+      str.name = str.id;
+      delete str.id;
+    };
 
     console.log('WS: massage from ' + str.type);
+    console.log(str);
     if (str.type === 'sensor') {                                                // +++СООБЩЕНИЕ ОТ СЕНСОРА+++
-      if(str.req === true){                                                     //***Сенсор запрашивает данные
+      if(str.command === "req"){                                                     //***Сенсор запрашивает данные
         mongoSens.findSens(str.name, str.place, 1, function(err, resolt){
           if (err) throw err;
-          console.log('WS: SEND for sensor:' + resolt);
-          if (resolt != null) ws.send(JSON.stringify(resolt));
+          if (resolt != null) {
+            let r = resolt[0].toObject({versionKey: false});
+            delete r._id;
+            delete r.inDate;
+            r.resol = resol_auto;
+            console.log('WS: SEND for sensor:' + r);
+            ws.send(JSON.stringify(r));
+          }
           else ws.send("{}");
         })
+      }
+      else if (str.command === "debug") {
+        console.error('>>   DEBUG SENSOR('+str.name+'_'+str.place+'): '+str.msg);
       }
       else{                                                                      //***Сенсор передаёт данные
           mongoSensList.addSens(str.name, function(err, sens){           //..Сохраняем в БД
@@ -120,7 +133,7 @@ app.ws('/ws', function(ws, req) {
           });
           mongoSens.addSens(str, function(err, sens){
             if(err) throw err;
-            else console.log('DB: sensData is added');
+            else console.log('DB: sensData is added \n');
           });
           console.log('Send: ok');
           ws.send('ok');                                                //Ответ сенсору 'ok'
@@ -139,6 +152,13 @@ app.ws('/ws', function(ws, req) {
     }
     else {                                                                       // +++СООБЩЕНИЕ ОТ ИНТЕРФЕЙСА+++
       // TO-DO...
+      if (str.command == 'req') {
+        // TO-DO...
+      }else if (str.command == 'setOptions') {
+        // TO-DO...
+      }else if (str.command == 'getOptions') {
+        // TO-DO...
+      }
     }
 
   });

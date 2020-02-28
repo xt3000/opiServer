@@ -23,7 +23,7 @@ function gTime() {
     termDate.classList.add('tootDays');
     var t = tm.getDate() - outTermTime.getDate();
     termDate.innerHTML = "Обновлено больше" + '</br>' + t + "дн. назад";
-  }else if (tm.getHours() > outTermTime.getHours()) {
+  }else if (tm.getHours() > (outTermTime.getHours()+2)) {
     var t = tm.getHours() - outTermTime.getHours();
     var termDate = document.getElementById('termDate');
     termDate.classList.add('tootHours');
@@ -35,7 +35,7 @@ function gTime() {
     termDate.innerHTML = "";
   }
 
-  setTimeout('gTime()', 500);
+  setTimeout('gTime()', 1000);
 }
 
 
