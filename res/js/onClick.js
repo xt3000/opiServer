@@ -8,6 +8,7 @@ function onOutClick() {
 }
 
 function onHtmlClick() {
+	event.stopPropagation();
 	goDefault();
 }
 
@@ -122,10 +123,10 @@ function goDef(id) {
 	elem.classList.remove('osCont_on');
 
 	var roomBox = elem.querySelector('.room-box');
-	roomBox.style.height = "";
+	if(roomBox) roomBox.style.height = "";
 
 	var roomName = elem.querySelector('.room-name');
-	roomName.style.letterSpacing = "";
+	if(roomName) roomName.style.letterSpacing = "";
 
 	var contentBox = elem.querySelectorAll('.content-box');
 	for (var i=0; i<contentBox.length; i++) {
@@ -133,7 +134,7 @@ function goDef(id) {
 	}
 
 	var room = elem.querySelector('.room');
-	room.style.top = "";
+	if(room)room.style.top = "";
 
 	elem.classList.remove('goOn');
 	elem.classList.remove('goOut');

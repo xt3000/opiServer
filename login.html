@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +19,19 @@
     <div class="form">
       <h1>iCloudHome</h1>
       <!-- <h3>Авторизуйтесь</h3> -->
-      <form method="post" onsubmit="onSubmit();">
-        <!-- <p id="login">Логин</p> -->
-        <input class="input-form" name="login" autocomplete="off" type="name" onfocus="onLogin()" placeholder="Логин">
-        <!-- <p id="pass">Пароль</p> -->
-        <input class="input-form" name="password" type="password" onfocus="onLogin()" placeholder="Пароль">
+      <form method="post" onsubmit="onSubmit();" id="forma">
+        <p id="login">Логин</p>
+        <input class="input-form" name="login" autocomplete="off" type="name">
+        <div class="hr" id="hrLogin"></div>
+        <p id="pass">Пароль</p>
+        <input class="input-form" name="password" autocomplete="off" type="password">
+        <div class="hr" id="hrPass"></div>
         <input class="btn" type="submit" value="Вход">
       </form>
     </div>
   </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="res/js/login.js"></script>
 </body>
 </html>

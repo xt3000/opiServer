@@ -43,4 +43,13 @@ function getSensor(str) {
     console.log('outTermTime: ' + outTermTime);
    }
   }
+  
+  if(str.auto != undefined){
+  	let idDiv = str.place + '_auto';
+  	var msgList = document.getElementById(idDiv);
+  	let val = '';
+  	if(str.auto == true) val = 'auto';
+  	else val = 'manual';
+  	msgList.innerHTML = val;
+  }
 }

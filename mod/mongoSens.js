@@ -23,6 +23,12 @@ const sensSchema = mongoose.Schema({
 	auto: {
 		type: Boolean			//Опция сенсора (resol добавляется перед отправкой из переменной)
 	},
+	s_timeout: {
+		type: Number
+	},
+	s_ignor: {
+		type: Number
+	},
 	temp: {
 		type: Number
 	},

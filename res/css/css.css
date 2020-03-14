@@ -21,6 +21,15 @@ html {
 
 }
 
+sup {
+	font-weight: bold;
+	padding: 1px;
+	margin-left: 10px;
+	color: #fff;
+	background: teal;
+	border-radius: 2px;
+}
+
 #particles-js{
 	position: absolute;
 	display: block;

@@ -52,6 +52,7 @@ passport.deserializeUser(function(id, done){
 //.......................
 
 app.use('/res', express.static('res'));
+app.use('/update', express.static('update'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(session(config.sessOptions));
@@ -92,7 +93,9 @@ app.ws('/ws', function(ws, req) {
 
   } else if (params.query.type === 'sensor') {                                  //***подключен 'Сенсор'***
     ws.mType = params.query.type;
-    ws.mID = params.query.id;
+    if (params.query.id && params.query.id != undefined) ws.mName = params.query.id;
+    else ws.mName = params.query.name;
+    ws.mPlace = params.query.place;
     sensors.push(ws);
   } else {
     ws.close();                                                                 //***усройство не распознано***
@@ -112,18 +115,17 @@ app.ws('/ws', function(ws, req) {
       if(str.command === "req"){                                                     //***Сенсор запрашивает данные
         mongoSens.findSens(str.name, str.place, 1, function(err, resolt){
           if (err) throw err;
-          if (resolt != null) {
+          if (resolt.length != 0) {
             let r = resolt[0].toObject({versionKey: false});
             delete r._id;
             delete r.inDate;
             r.resol = resol_auto;
-            console.log('WS: SEND for sensor:' + r);
+            console.log('WS: SEND for sensor:\n' + JSON.stringify(r, null, 2));
             ws.send(JSON.stringify(r));
           }
-          else ws.send("{}");
         })
       }
-      else if (str.command === "debug") {
+      else if (str.command === "debug") {                                       //***Сенсор передаёт DEBUG сообщение
         console.error('>>   DEBUG SENSOR('+str.name+'_'+str.place+'): '+str.msg);
       }
       else{                                                                      //***Сенсор передаёт данные
@@ -158,6 +160,22 @@ app.ws('/ws', function(ws, req) {
         // TO-DO...
       }else if (str.command == 'getOptions') {
         // TO-DO...
+      }else if (str.command == 'upd') {
+        // TO-DO...
+        var s_found = false;
+        for(var i = 0; i < sensors.length; i++){
+          if (sensors[i].mName == str.name && sensors[i].mPlace == str.place) {
+            if(sensors[i].readyState != ws.OPEN){
+              sensors[i].close();
+              sensors.splice(i, 1);
+              continue;
+            }
+            s_found = true
+            console.warn('SENSOR: ' + str.name + '_' + str.place + ' take WebUpdate.');
+            sensors[i].send('upd');
+          }
+        }
+        if (s_found == false) console.warn('SENSOR: ' + str.name + '_' + str.place + ' NOT found');
       }
     }
 

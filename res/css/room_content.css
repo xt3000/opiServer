@@ -22,6 +22,7 @@
 }
 
 .content-box {
+  color: #333;
   background: #fff;
   transition: margin-top 1.6s cubic-bezier(0.5, -0.5, 0.4, 6) 0.7s;
   display: block;

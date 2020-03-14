@@ -24,35 +24,80 @@ h1 {
 }
 
 p {
+	pointer-events: none;
+	cursor: default;
+	position: absolute;
+	color: #eee;			/*	#4f5b65		*/
+	display: inline-block;
+	z-index: 9;
 	margin: 0;
 	padding: 0;
-	font-size: 1rem;
-	/* transform: translate(1rem, 2rem);
-	transition: transform .5 ease; */
+	font-size: 1.3rem;
+	/* transform: translate(1rem, 10%); */
+	transition: transform .3s ease,
+							color  .3s ease;
+}
+
+.moveUp {
+	transform: translate(-0.5rem, -1.5rem);
+	font-size: 0.9rem;
+	color: #aaa;
+}
+
+#login, input[name=login] {
+	top: 1.5rem;
+	left: 1.5rem;
+}
+
+#pass, input[name=pass] {
+	top: 6.1rem;
+	left: 1.5rem;
+}
+
+.hr {
+	height: 1px;
+	width: 90%;
+	background: #030f1a;
+	margin: 0 auto;
+	transform: translate(0, -2rem);
+	padding: 0;
 }
 
 form {
+	padding-top: 1rem;
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, -30%);
+	z-index: 10;
+	width: 16rem;
+	height: 65%;
   max-width: 650px;
   margin: auto;
   background: transparent;
 }
 
 .input-form{
-	width: 80%;
+	/* position: absolute;
+	z-index: 10;*/
+	width: 88%;
   display: block;
-  margin: 0rem auto 2rem auto;
+  margin: 0 auto 2rem auto;
   padding: .375rem .75rem;
   /* border: 1px solid #ced4da; */
 	border: none;
-	border-bottom: 1px solid #6c757d;
+	/* border-bottom: 1px solid #6c757d; */
   /* border-radius: 5px; */
-  font-size: 1.3rem;
-  color: inherit;
+  font-size: 1.2rem;
+  color: #fff;
   background: inherit;
-  transition: border-bottom .4 ease-in-out;
+  transition: width .4s ease-in-out,
+							border .4s ease-in-out;
 }
 
 input[type="submit"] {
+	/* position: absolute;
+	top: 17rem; */
 	font-size: 1.4rem;
 	width: 90%;
 	display: block;
@@ -70,11 +115,13 @@ input[type="submit"] {
 	width: 80%;
 } */
 
-.input-form:focus, .input-form:focus, .input-form:hover, .input-form:hover {
-	width: 90%;
+.input-form:focus {
   outline: 0;
-  border-color: #fff;
-  /* box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); */
+}
+
+.inputActive {
+	width: 100%;
+  background: red;
 }
 
 
@@ -84,15 +131,18 @@ input[type="submit"] {
 
 .card {
 	position: absolute;
+	max-height: 60vh;
+	height: 22rem;
+	/* width: 190px; */
 	display: block;
 	background: inherit;
 	/* height: 40%; */
 	/* width: 50%; */
-	min-width: 15rem;
+	min-width: 16rem;
 	padding: 3rem 2rem;
 	top: 50%;
 	right: 50%;
-	transform: translate(50%, -50%);
+	transform: translate(50%, -40%);
 }
 
 .avotar {

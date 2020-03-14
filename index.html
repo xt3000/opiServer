@@ -12,7 +12,8 @@
       <link rel="stylesheet" href="res/css/header.css">
       <link rel="stylesheet" href="res/css/room_content.css">
       <link rel="stylesheet" href="res/css/tempOutOfTime.css">
-      <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600&display=swap&subset=cyrillic" rel="stylesheet">
+      <!-- <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600&display=swap&subset=cyrillic" rel="stylesheet"> -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
    </head>
    <body class="bg" onload="gTime()">
@@ -58,7 +59,16 @@
             <div class="room-box">
               <div class="room">
                 <!-- ROOM CONTENT -->
-                <div class="content-box"></div>
+                <div class="content-box">DoorSensor
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k0', 'upd', 0)">update</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="content-box"></div>
                 <div class="content-box"></div>
               </div>
@@ -80,7 +90,16 @@
             <div class="room-box">
               <div class="room">
                 <!-- ROOM CONTENT -->
-                <div class="content-box"></div>
+                <div class="content-box">DoorSensor
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k1', 'upd', 0)">update</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="content-box"></div>
                 <div class="content-box"></div>
               </div>
@@ -104,7 +123,16 @@
             <div class="room-box">
               <div class="room">
                 <!-- ROOM CONTENT -->
-                <div class="content-box"></div>
+                <div class="content-box">DoorSensor
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k2', 'upd', 0)">update</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="content-box"></div>
                 <div class="content-box"></div>
               </div>
@@ -128,7 +156,16 @@
             <div class="room-box">
               <div class="room">
                 <!-- ROOM CONTENT -->
-                <div class="content-box"></div>
+                <div class="content-box">DoorSensor
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k3', 'upd', 0)">update</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="content-box"></div>
                 <div class="content-box"></div>
               </div>
@@ -150,7 +187,16 @@
             <div class="room-box">
               <div class="room">
                 <!-- ROOM CONTENT -->
-                <div class="content-box"></div>
+                <div class="content-box">DoorSensor<sup id="k4_auto"></sup>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-9"></div>
+                      <div class="col-3">
+                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k4', 'upd', 0)">update</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="content-box"></div>
                 <div class="content-box"></div>
               </div>
@@ -161,7 +207,7 @@
 
       <script src="res/js/time.js"></script>
       <script src="res/js/onClick.js" defer></script>
-      <script src="res/js/wrapperSize.js" defer></script>
+      <script src="res/js/wrapperSize.js" async></script>
       <script src="res/js/menu.js" defer></script>
       <script src="res/js/ws.js" defer></script>
       <script src="res/js/ws_getSensor.js" defer></script>

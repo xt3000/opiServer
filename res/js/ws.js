@@ -21,11 +21,12 @@ function onClose(evt) {
     console.log('WS: Disconnect');
     //TODO 'ws: disconnect'
   }
+  ws = new WebSocket(location.origin.replace(/^http/, 'ws') + '/ws?type=interface');
 }
 
 function onMessage(evt) {
   console.log(evt.data);
-  var str = JSON.parse(evt.data, function(key, value) {
+  let str = JSON.parse(evt.data, function(key, value) {
     if (key == 'inDate') {return new Date(value);}
     return value;
   });
@@ -43,16 +44,17 @@ function onError(error) {
   alert('ws: error(' + error.message + ')');
 }
 
-function wsSend(com, place, num) {
+function wsSend(name, place, com, num) {
   console.log('WS: Send');
-  var str = {
+  let obj = {
     type: "interface",
+    name: name,
+    place: place,
     command: com,     //    'req' - запрос массива данных,
                       // ...'setOptions' - отправка настроек на сервер,
                       // ...'getOptions' - запрос настроек
-    place: place,
+                      // ...'upd' - update прошивки сенсора
     num: num
   };
-  var jsonMsg = JSON.stringify(str);
-  ws.send(jsonMsg);
+  ws.send(JSON.stringify(obj));
 }
