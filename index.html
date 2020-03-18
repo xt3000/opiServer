@@ -22,28 +22,33 @@
 
       <!-- Content -->
       <!--Header-->
-      <div class="header" onclick="onOutClick()">
-        <div class="clock" id="clock"></div>
-        <div class="spec2"></div>
-        <div class="date" id="date"></div>
-      </div>
-      <div class="ws" onclick="onOutClick()">
-        <div class="wbox">
-          <div class="box" id="outside_temp"></div>
-          <div class="box" id="outside_pres"></div>
-          <div class="box" id="outside_hum"></div>
-          <div class="box" id="outside_light"></div>
-          <div class="toot" id="termDate"></div>
+      <header onclick="onOutClick()">
+        <div class="clock_box">
+          <div class="date" id="date"></div>
+          <div class="spec2"></div>
+          <div class="clock" id="clock"></div>
         </div>
-      </div>
+        <div class="ws">
+          <div class="wbox">
+            <div class="box" id="outside_pres"></div>
+            <div class="box" id="outside_hum"></div>
+            <div class="box" id="outside_temp"></div>
+            <div class="box" id="outside_light"></div>
+            <div class="toot" id="termDate"></div>
+          </div>
+        </div>
+      </header>
 
       <div class="outSensCont" id="osCont"  onclick="goDefault()">
-      		<div class="outSensBox trans" id="osBox"></div>
-
+      		<div class="outSensBox trans" id="osBox" onclick="event.stopPropagation();">
+            <canvas id="myChart"></canvas>
+          </div>
       </div>
 
-      <!--Комната К0-коридор-->
+      <!-- Квартира -->
       <div class="wrapper bg" id="wrapper">
+
+        <!--Комната К0-коридор-->
       		<div class="k0 sh trans" id="k0" onclick="onK0Click()">
       			<div class="hbox">
               <div class="sens-box to-right">
@@ -64,7 +69,7 @@
                     <div class="row">
                       <div class="col-9"></div>
                       <div class="col-3">
-                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k0', 'upd', 0)">update</div>
+                        <div class="btn btn-danger btn-sm text-right" onclick="onUpdClick('door', 'k0')">update</div>
                       </div>
                     </div>
                   </div>
@@ -95,7 +100,7 @@
                     <div class="row">
                       <div class="col-9"></div>
                       <div class="col-3">
-                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k1', 'upd', 0)">update</div>
+                        <div class="btn btn-danger btn-sm text-right" onclick="onUpdClick('door', 'k1')">update</div>
                       </div>
                     </div>
                   </div>
@@ -128,7 +133,7 @@
                     <div class="row">
                       <div class="col-9"></div>
                       <div class="col-3">
-                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k2', 'upd', 0)">update</div>
+                        <div class="btn btn-danger btn-sm text-right" onclick="onUpdClick('door', 'k2')">update</div>
                       </div>
                     </div>
                   </div>
@@ -161,7 +166,7 @@
                     <div class="row">
                       <div class="col-9"></div>
                       <div class="col-3">
-                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k3', 'upd', 0)">update</div>
+                        <div class="btn btn-danger btn-sm text-right" onclick="onUpdClick('door', 'k3')">update</div>
                       </div>
                     </div>
                   </div>
@@ -192,7 +197,7 @@
                     <div class="row">
                       <div class="col-9"></div>
                       <div class="col-3">
-                        <div class="btn btn-danger text-right" onclick="wsSend('door', 'k4', 'upd', 0)">update</div>
+                        <div class="btn btn-danger btn-sm text-right" onclick="onUpdClick('door', 'k4')">update</div>
                       </div>
                     </div>
                   </div>
@@ -205,8 +210,13 @@
       </div>
 
 
+
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script src="res/js/time.js"></script>
       <script src="res/js/onClick.js" defer></script>
+      <script src="res/js/btnClick.js" defer></script>
       <script src="res/js/wrapperSize.js" async></script>
       <script src="res/js/menu.js" defer></script>
       <script src="res/js/ws.js" defer></script>

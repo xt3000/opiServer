@@ -45,7 +45,7 @@ function onError(error) {
 }
 
 function wsSend(name, place, com, num) {
-  console.log('WS: Send');
+  console.log('WS: Send: ' + name + '_' + place + ': ' + com);
   let obj = {
     type: "interface",
     name: name,

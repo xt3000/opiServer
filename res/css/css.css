@@ -88,6 +88,7 @@ i.lg {
 }
 
 .sh {
+	pointer-events: auto;
 	overflow: hidden;
 	opacity: .93;
 	border-radius: 5px;
@@ -109,6 +110,7 @@ i.lg {
 }
 
 .wrapper {
+	pointer-events: none;
 	margin: auto;
 	position: relative;
 	width: 35vw;
@@ -198,7 +200,7 @@ i.lg {
 }
 
 .box {
-	/* display: inline-block; */
+	cursor: default;
 	color: #fff;
 	opacity: 1;
 	background: transparent;
@@ -227,7 +229,7 @@ i.lg {
 	background: #253a47;
 	border-radius: 3px;
 	margin: 0 5px 0 5px;
-	padding: 0.4px;
+	padding: 0.5px;
 }
 
 .sw_on {
@@ -258,6 +260,10 @@ i.lg {
 		font-size: 0.6rem;
 		-webkit-font-size-delta: 0.6rem;
 	}
+	header {
+		top: -7rem!important;
+		/* font-size: 0.7rem; */
+	}
 }
 
 /* Планшет */
@@ -266,10 +272,10 @@ i.lg {
 		font-size: 0.7rem;
 		-webkit-font-size-delta: 0.7rem;
 	}
-	.box {
+	/* .box {
 		font-size: 1.4rem;
 		-webkit-font-size-delta: 1.4rem;
-	}
+	} */
 }
 
 /* Монитор */
@@ -277,5 +283,9 @@ i.lg {
 	html {
 		font-size: 1rem;
 		-webkit-font-size-delta: 1rem;
+	}
+	header {
+		top: -5.3rem;
+		/* font-size: 0.7rem; */
 	}
 }

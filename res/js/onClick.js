@@ -3,8 +3,10 @@
 
 function onOutClick() {
 	event.stopPropagation();
-	var elem = document.getElementById('osCont');
+	var elem = document.querySelector('#osCont');
 	elem.classList.add('osCont_on');
+	var elem = document.querySelector('#osBox');
+	elem.classList.add('osBox_on');
 }
 
 function onHtmlClick() {
@@ -21,7 +23,7 @@ function onK3Click() {
 	goOut("k0");
 	goOut("k4");
 
-	wsSend('req', 'k3', 20);
+	wsSend('', 'k3', 'req', 20);
 }
 
 function onK2Click() {
@@ -33,7 +35,7 @@ function onK2Click() {
 	goOut("k0");
 	goOut("k4");
 
-	wsSend('req', 'k2', 20);
+	wsSend('', 'k2', 'req', 20);
 }
 
 function onK1Click() {
@@ -45,7 +47,7 @@ function onK1Click() {
 	goOut("k0");
 	goOut("k4");
 
-	wsSend('req', 'k1', 20);
+	wsSend('', 'k1', 'req', 20);
 }
 
 function onK0Click() {
@@ -57,7 +59,7 @@ function onK0Click() {
 	goOut("k3");
 	goOut("k4");
 
-	wsSend('req', 'k0', 20);
+	wsSend('', 'k0', 'req', 20);
 }
 
 function onK4Click() {
@@ -69,7 +71,7 @@ function onK4Click() {
 	goOut("k0");
 	goOut("k3");
 
-	wsSend('req', 'k4', 20);
+	wsSend('', 'k4', 'req', 20);
 }
 
 //======================
@@ -114,13 +116,14 @@ function goDefault() {
 		goDef("k2");
 		goDef("k3");
 		goDef("k4");
-		goDef("osCont")
+		goDef("osCont");
+		goDef("osBox")
 }
 
 function goDef(id) {
 	var elem = document.getElementById(id);
-
 	elem.classList.remove('osCont_on');
+	elem.classList.remove('osBox_on');
 
 	var roomBox = elem.querySelector('.room-box');
 	if(roomBox) roomBox.style.height = "";
